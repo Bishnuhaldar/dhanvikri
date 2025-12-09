@@ -5,12 +5,16 @@ import re
 from typing import List, Dict
 import base64
 
-# GitHub Configuration
-GITHUB_TOKEN = "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"
-GITHUB_REPO = "Bishnuhaldar/dhanvikri"
-GITHUB_BRANCH = "main"
-GITHUB_FILEPATH = "index.html"
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN") or os.environ.get("GITHUB_TOKEN")
+GITHUB_REPO  = st.secrets.get("GITHUB_REPO") or "Bishnuhaldar/dhanvikri"
+GITHUB_BRANCH = st.secrets.get("GITHUB_BRANCH") or "main"
+GITHUB_FILEPATH = st.secrets.get("GITHUB_FILEPATH") or "index.html"
 GITHUB_API = "https://api.github.com"
+
+if not GITHUB_TOKEN:
+    st.error("GitHub token not found. Add GITHUB_TOKEN to Streamlit Secrets or set the GITHUB_TOKEN env var for local dev.")
+    st.stop()
+    
 
 # Page configuration
 st.set_page_config(
