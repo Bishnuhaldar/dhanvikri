@@ -325,16 +325,16 @@
                 <label for="areaSelect">Select Your Area</label>
                 <select class="area-select" id="areaSelect">
                     <option value="">-- Choose an area --</option>
+                    <option value="Gauripur">Gauripur</option>
                     <option value="Ghot">Ghot</option>
-                    <option value="Simultala">Simultala</option>
-                    <option value="Shyamnagar">Shyamnagar</option>
-                    <option value="Vikaspalli">Vikaspalli</option>
+                    <option value="Kotmi">Kotmi</option>
                     <option value="Netajinagar">Netajinagar</option>
                     <option value="Palaspur">Palaspur</option>
-                    <option value="Shantinagar">Shantinagar</option>
-                    <option value="Gauripur">Gauripur</option>
                     <option value="Regdi">Regdi</option>
-                    <option value="Kotmi">Kotmi</option>
+                    <option value="Shantinagar">Shantinagar</option>
+                    <option value="Shyamnagar">Shyamnagar</option>
+                    <option value="Simultala">Simultala</option>
+                    <option value="Vikaspalli">Vikaspalli</option>
                 </select>
                 <button class="btn" onclick="showDealers()">Find Dealers</button>
             </div>
@@ -352,151 +352,411 @@
         // Sample data - Dealers can now operate in multiple regions
         const dealersData = [
             {
-                name: "Ghot Grain Traders",
-                contact: "📞 +91 98765 43210",
-                rating: "4.8 ⭐",
-                regions: ["Ghot", "Simultala", "Shyamnagar"],
-                paddyTypes: [
-                    { name: "Basmati 1121", price: "₹3,200", unit: "per quintal" },
-                    { name: "PR 126", price: "₹2,850", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,650", unit: "per quintal" }
-                ]
+                        "name": "Ghot Grain Traders",
+                        "contact": "📞 +91 98765 43210",
+                        "rating": "4.8 ⭐",
+                        "regions": [
+                                    "Ghot",
+                                    "Simultala",
+                                    "Shyamnagar"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1121",
+                                                "price": "₹3,200",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "PR 126",
+                                                "price": "₹2,850",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,650",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Simultala Rice Center",
-                contact: "📞 +91 98765 43211",
-                rating: "4.6 ⭐",
-                regions: ["Simultala", "Vikaspalli"],
-                paddyTypes: [
-                    { name: "IR 64", price: "₹2,150", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,400", unit: "per quintal" },
-                    { name: "Samba Mahsuri", price: "₹2,550", unit: "per quintal" }
-                ]
+                        "name": "Simultala Rice Center",
+                        "contact": "📞 +91 98765 43211",
+                        "rating": "4.6 ⭐",
+                        "regions": [
+                                    "Simultala",
+                                    "Vikaspalli"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "IR 64",
+                                                "price": "₹2,150",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,400",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Samba Mahsuri",
+                                                "price": "₹2,550",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Shyamnagar Paddy Merchants",
-                contact: "📞 +91 98765 43212",
-                rating: "4.9 ⭐",
-                regions: ["Shyamnagar", "Netajinagar", "Palaspur"],
-                paddyTypes: [
-                    { name: "Basmati 1121", price: "₹3,250", unit: "per quintal" },
-                    { name: "Pusa 44", price: "₹2,700", unit: "per quintal" },
-                    { name: "PR 126", price: "₹2,920", unit: "per quintal" }
-                ]
+                        "name": "Shyamnagar Paddy Merchants",
+                        "contact": "📞 +91 98765 43212",
+                        "rating": "4.9 ⭐",
+                        "regions": [
+                                    "Shyamnagar",
+                                    "Netajinagar",
+                                    "Palaspur"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1121",
+                                                "price": "₹3,250",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Pusa 44",
+                                                "price": "₹2,700",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "PR 126",
+                                                "price": "₹2,920",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Vikaspalli Agro Hub",
-                contact: "📞 +91 97654 32109",
-                rating: "4.7 ⭐",
-                regions: ["Vikaspalli", "Shantinagar", "Gauripur"],
-                paddyTypes: [
-                    { name: "MTU 1010", price: "₹2,500", unit: "per quintal" },
-                    { name: "BPT 5204", price: "₹2,350", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,400", unit: "per quintal" }
-                ]
+                        "name": "Vikaspalli Agro Hub",
+                        "contact": "📞 +91 97654 32109",
+                        "rating": "4.7 ⭐",
+                        "regions": [
+                                    "Vikaspalli",
+                                    "Shantinagar",
+                                    "Gauripur"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "MTU 1010",
+                                                "price": "₹2,500",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "BPT 5204",
+                                                "price": "₹2,350",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,400",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Netajinagar Rice Mills",
-                contact: "📞 +91 97654 32110",
-                rating: "4.5 ⭐",
-                regions: ["Netajinagar", "Palaspur"],
-                paddyTypes: [
-                    { name: "IR 64", price: "₹2,200", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,450", unit: "per quintal" },
-                    { name: "Gobindobhog", price: "₹3,500", unit: "per quintal" }
-                ]
+                        "name": "Netajinagar Rice Mills",
+                        "contact": "📞 +91 97654 32110",
+                        "rating": "4.5 ⭐",
+                        "regions": [
+                                    "Netajinagar",
+                                    "Palaspur"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "IR 64",
+                                                "price": "₹2,200",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,450",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Gobindobhog",
+                                                "price": "₹3,500",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Palaspur Grain Dealers",
-                contact: "📞 +91 96543 21098",
-                rating: "4.8 ⭐",
-                regions: ["Palaspur", "Shantinagar", "Regdi"],
-                paddyTypes: [
-                    { name: "Basmati 1509", price: "₹3,100", unit: "per quintal" },
-                    { name: "CSR 30", price: "₹2,800", unit: "per quintal" },
-                    { name: "PR 121", price: "₹2,650", unit: "per quintal" }
-                ]
+                        "name": "Palaspur Grain Dealers",
+                        "contact": "📞 +91 96543 21098",
+                        "rating": "4.8 ⭐",
+                        "regions": [
+                                    "Palaspur",
+                                    "Shantinagar",
+                                    "Regdi"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1509",
+                                                "price": "₹3,100",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "CSR 30",
+                                                "price": "₹2,800",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "PR 121",
+                                                "price": "₹2,650",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Shantinagar Farmers Choice",
-                contact: "📞 +91 96543 21099",
-                rating: "4.6 ⭐",
-                regions: ["Shantinagar", "Gauripur", "Kotmi"],
-                paddyTypes: [
-                    { name: "ADT 45", price: "₹2,300", unit: "per quintal" },
-                    { name: "IR 20", price: "₹2,150", unit: "per quintal" },
-                    { name: "CR 1009", price: "₹2,250", unit: "per quintal" }
-                ]
+                        "name": "Shantinagar Farmers Choice",
+                        "contact": "📞 +91 96543 21099",
+                        "rating": "4.6 ⭐",
+                        "regions": [
+                                    "Shantinagar",
+                                    "Gauripur",
+                                    "Kotmi"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "ADT 45",
+                                                "price": "₹2,300",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "IR 20",
+                                                "price": "₹2,150",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "CR 1009",
+                                                "price": "₹2,250",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Gauripur Paddy Center",
-                contact: "📞 +91 95432 10987",
-                rating: "4.9 ⭐",
-                regions: ["Gauripur", "Regdi"],
-                paddyTypes: [
-                    { name: "Swarna", price: "₹2,420", unit: "per quintal" },
-                    { name: "IR 64", price: "₹2,180", unit: "per quintal" },
-                    { name: "Minikit", price: "₹2,300", unit: "per quintal" }
-                ]
+                        "name": "Gauripur Paddy Center",
+                        "contact": "📞 +91 95432 10987",
+                        "rating": "4.9 ⭐",
+                        "regions": [
+                                    "Gauripur",
+                                    "Regdi"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,420",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "IR 64",
+                                                "price": "₹2,180",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Minikit",
+                                                "price": "₹2,300",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Regdi Rice Corporation",
-                contact: "📞 +91 95432 10988",
-                rating: "4.7 ⭐",
-                regions: ["Regdi", "Kotmi", "Ghot"],
-                paddyTypes: [
-                    { name: "BPT 5204", price: "₹2,400", unit: "per quintal" },
-                    { name: "MTU 1010", price: "₹2,550", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,380", unit: "per quintal" }
-                ]
+                        "name": "Regdi Rice Corporation",
+                        "contact": "📞 +91 95432 10988",
+                        "rating": "4.7 ⭐",
+                        "regions": [
+                                    "Regdi",
+                                    "Kotmi",
+                                    "Ghot"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "BPT 5204",
+                                                "price": "₹2,400",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "MTU 1010",
+                                                "price": "₹2,550",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,380",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Kotmi Grain Merchants",
-                contact: "📞 +91 94321 09876",
-                rating: "4.6 ⭐",
-                regions: ["Kotmi", "Ghot", "Simultala"],
-                paddyTypes: [
-                    { name: "Basmati 1121", price: "₹3,180", unit: "per quintal" },
-                    { name: "PR 126", price: "₹2,880", unit: "per quintal" },
-                    { name: "Pusa 44", price: "₹2,680", unit: "per quintal" }
-                ]
+                        "name": "Kotmi Grain Merchants",
+                        "contact": "📞 +91 94321 09876",
+                        "rating": "4.6 ⭐",
+                        "regions": [
+                                    "Kotmi",
+                                    "Ghot",
+                                    "Simultala"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1121",
+                                                "price": "₹3,180",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "PR 126",
+                                                "price": "₹2,880",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Pusa 44",
+                                                "price": "₹2,680",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "All Area Paddy Traders",
-                contact: "📞 +91 93210 98765",
-                rating: "4.8 ⭐",
-                regions: ["Ghot", "Simultala", "Shyamnagar", "Vikaspalli", "Netajinagar", "Palaspur"],
-                paddyTypes: [
-                    { name: "Basmati 1121", price: "₹3,220", unit: "per quintal" },
-                    { name: "Swarna", price: "₹2,420", unit: "per quintal" },
-                    { name: "IR 64", price: "₹2,220", unit: "per quintal" },
-                    { name: "MTU 1010", price: "₹2,520", unit: "per quintal" }
-                ]
+                        "name": "All Area Paddy Traders",
+                        "contact": "📞 +91 93210 98765",
+                        "rating": "4.8 ⭐",
+                        "regions": [
+                                    "Ghot",
+                                    "Simultala",
+                                    "Shyamnagar",
+                                    "Vikaspalli",
+                                    "Netajinagar",
+                                    "Palaspur"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1121",
+                                                "price": "₹3,220",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,420",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "IR 64",
+                                                "price": "₹2,220",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "MTU 1010",
+                                                "price": "₹2,520",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Regional Rice Hub",
-                contact: "📞 +91 92109 87654",
-                rating: "4.7 ⭐",
-                regions: ["Shantinagar", "Gauripur", "Regdi", "Kotmi"],
-                paddyTypes: [
-                    { name: "Swarna", price: "₹2,400", unit: "per quintal" },
-                    { name: "IR 64", price: "₹2,200", unit: "per quintal" },
-                    { name: "BPT 5204", price: "₹2,380", unit: "per quintal" },
-                    { name: "Samba Mahsuri", price: "₹2,480", unit: "per quintal" }
-                ]
+                        "name": "Regional Rice Hub",
+                        "contact": "📞 +91 92109 87654",
+                        "rating": "4.7 ⭐",
+                        "regions": [
+                                    "Shantinagar",
+                                    "Gauripur",
+                                    "Regdi",
+                                    "Kotmi"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Swarna",
+                                                "price": "₹2,400",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "IR 64",
+                                                "price": "₹2,200",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "BPT 5204",
+                                                "price": "₹2,380",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Samba Mahsuri",
+                                                "price": "₹2,480",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             },
             {
-                name: "Premier Grain Solutions",
-                contact: "📞 +91 91098 76543",
-                rating: "4.9 ⭐",
-                regions: ["Ghot", "Shyamnagar", "Palaspur", "Regdi"],
-                paddyTypes: [
-                    { name: "Basmati 1509", price: "₹3,150", unit: "per quintal" },
-                    { name: "Basmati 1121", price: "₹3,280", unit: "per quintal" },
-                    { name: "PR 126", price: "₹2,900", unit: "per quintal" }
-                ]
+                        "name": "Premier Grain Solutions",
+                        "contact": "📞 +91 91098 76543",
+                        "rating": "4.9 ⭐",
+                        "regions": [
+                                    "Ghot",
+                                    "Shyamnagar",
+                                    "Palaspur",
+                                    "Regdi"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "Basmati 1509",
+                                                "price": "₹3,150",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Basmati 1121",
+                                                "price": "₹3,280",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "PR 126",
+                                                "price": "₹2,900",
+                                                "unit": "per quintal"
+                                    }
+                        ]
+            },
+            {
+                        "name": "Kushal dhan kharidi kendra vikaspalli",
+                        "contact": "8554003147",
+                        "rating": "4.9",
+                        "regions": [
+                                    "Vikaspalli",
+                                    "Simultala"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "bhari dhar",
+                                                "price": "2500",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Halka dhan",
+                                                "price": "1500",
+                                                "unit": "per quintal"
+                                    }
+                        ]
+            },
+            {
+                        "name": "Kushal dhan kharidi kendra vikaspalli",
+                        "contact": "8554003147",
+                        "rating": "4.9",
+                        "regions": [
+                                    "Vikaspalli",
+                                    "Simultala"
+                        ],
+                        "paddyTypes": [
+                                    {
+                                                "name": "bhari dhar",
+                                                "price": "2500",
+                                                "unit": "per quintal"
+                                    },
+                                    {
+                                                "name": "Halka dhan",
+                                                "price": "1500",
+                                                "unit": "per quintal"
+                                    }
+                        ]
             }
-        ];
+];
 
         function showDealers() {
             const areaSelect = document.getElementById('areaSelect');
