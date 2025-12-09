@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paddy Price Finder - Best Dealers for Farmers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .area-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .area-selection label {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .area-select {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .area-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .dealers-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .dealers-container.active {
+            display: block;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .area-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .dealer-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dealer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .dealer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dealer-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .dealer-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #ffd700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .dealer-info {
+            margin-bottom: 15px;
+        }
+
+        .dealer-contact {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dealer-regions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .region-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .region-badge.current {
+            background: #48bb78;
+        }
+
+        .paddy-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .paddy-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .paddy-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .paddy-price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #48bb78;
+        }
+
+        .price-unit {
+            font-size: 0.8em;
+            color: #718096;
+            font-weight: 400;
+        }
+
+        .no-dealers {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            font-size: 1.2em;
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .dealer-name {
+                font-size: 1.3em;
+            }
+
+            .paddy-types {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .dealer-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 Paddy Price Finder</h1>
+            <p>Find the best dealers and prices for your paddy</p>
+        </div>
+
+        <!-- Area Selection Screen -->
+        <div class="card" id="areaSelectionCard">
+            <div class="area-selection">
+                <label for="areaSelect">Select Your Area</label>
+                <select class="area-select" id="areaSelect">
+                    <option value="">-- Choose an area --</option>
+                    <option value="Ghot">Ghot</option>
+                    <option value="Simultala">Simultala</option>
+                    <option value="Shyamnagar">Shyamnagar</option>
+                    <option value="Vikaspalli">Vikaspalli</option>
+                    <option value="Netajinagar">Netajinagar</option>
+                    <option value="Palaspur">Palaspur</option>
+                    <option value="Shantinagar">Shantinagar</option>
+                    <option value="Gauripur">Gauripur</option>
+                    <option value="Regdi">Regdi</option>
+                    <option value="Kotmi">Kotmi</option>
+                </select>
+                <button class="btn" onclick="showDealers()">Find Dealers</button>
+            </div>
+        </div>
+
+        <!-- Dealers List Screen -->
+        <div class="card dealers-container" id="dealersCard">
+            <button class="back-btn" onclick="goBack()">← Back to Area Selection</button>
+            <h2 class="area-title" id="selectedArea"></h2>
+            <div id="dealersList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - Dealers can now operate in multiple regions
+        const dealersData = [
+            {
+                name: "Ghot Grain Traders",
+                contact: "📞 +91 98765 43210",
+                rating: "4.8 ⭐",
+                regions: ["Ghot", "Simultala", "Shyamnagar"],
+                paddyTypes: [
+                    { name: "Basmati 1121", price: "₹3,200", unit: "per quintal" },
+                    { name: "PR 126", price: "₹2,850", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,650", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Simultala Rice Center",
+                contact: "📞 +91 98765 43211",
+                rating: "4.6 ⭐",
+                regions: ["Simultala", "Vikaspalli"],
+                paddyTypes: [
+                    { name: "IR 64", price: "₹2,150", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,400", unit: "per quintal" },
+                    { name: "Samba Mahsuri", price: "₹2,550", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Shyamnagar Paddy Merchants",
+                contact: "📞 +91 98765 43212",
+                rating: "4.9 ⭐",
+                regions: ["Shyamnagar", "Netajinagar", "Palaspur"],
+                paddyTypes: [
+                    { name: "Basmati 1121", price: "₹3,250", unit: "per quintal" },
+                    { name: "Pusa 44", price: "₹2,700", unit: "per quintal" },
+                    { name: "PR 126", price: "₹2,920", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Vikaspalli Agro Hub",
+                contact: "📞 +91 97654 32109",
+                rating: "4.7 ⭐",
+                regions: ["Vikaspalli", "Shantinagar", "Gauripur"],
+                paddyTypes: [
+                    { name: "MTU 1010", price: "₹2,500", unit: "per quintal" },
+                    { name: "BPT 5204", price: "₹2,350", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,400", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Netajinagar Rice Mills",
+                contact: "📞 +91 97654 32110",
+                rating: "4.5 ⭐",
+                regions: ["Netajinagar", "Palaspur"],
+                paddyTypes: [
+                    { name: "IR 64", price: "₹2,200", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,450", unit: "per quintal" },
+                    { name: "Gobindobhog", price: "₹3,500", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Palaspur Grain Dealers",
+                contact: "📞 +91 96543 21098",
+                rating: "4.8 ⭐",
+                regions: ["Palaspur", "Shantinagar", "Regdi"],
+                paddyTypes: [
+                    { name: "Basmati 1509", price: "₹3,100", unit: "per quintal" },
+                    { name: "CSR 30", price: "₹2,800", unit: "per quintal" },
+                    { name: "PR 121", price: "₹2,650", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Shantinagar Farmers Choice",
+                contact: "📞 +91 96543 21099",
+                rating: "4.6 ⭐",
+                regions: ["Shantinagar", "Gauripur", "Kotmi"],
+                paddyTypes: [
+                    { name: "ADT 45", price: "₹2,300", unit: "per quintal" },
+                    { name: "IR 20", price: "₹2,150", unit: "per quintal" },
+                    { name: "CR 1009", price: "₹2,250", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Gauripur Paddy Center",
+                contact: "📞 +91 95432 10987",
+                rating: "4.9 ⭐",
+                regions: ["Gauripur", "Regdi"],
+                paddyTypes: [
+                    { name: "Swarna", price: "₹2,420", unit: "per quintal" },
+                    { name: "IR 64", price: "₹2,180", unit: "per quintal" },
+                    { name: "Minikit", price: "₹2,300", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Regdi Rice Corporation",
+                contact: "📞 +91 95432 10988",
+                rating: "4.7 ⭐",
+                regions: ["Regdi", "Kotmi", "Ghot"],
+                paddyTypes: [
+                    { name: "BPT 5204", price: "₹2,400", unit: "per quintal" },
+                    { name: "MTU 1010", price: "₹2,550", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,380", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Kotmi Grain Merchants",
+                contact: "📞 +91 94321 09876",
+                rating: "4.6 ⭐",
+                regions: ["Kotmi", "Ghot", "Simultala"],
+                paddyTypes: [
+                    { name: "Basmati 1121", price: "₹3,180", unit: "per quintal" },
+                    { name: "PR 126", price: "₹2,880", unit: "per quintal" },
+                    { name: "Pusa 44", price: "₹2,680", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "All Area Paddy Traders",
+                contact: "📞 +91 93210 98765",
+                rating: "4.8 ⭐",
+                regions: ["Ghot", "Simultala", "Shyamnagar", "Vikaspalli", "Netajinagar", "Palaspur"],
+                paddyTypes: [
+                    { name: "Basmati 1121", price: "₹3,220", unit: "per quintal" },
+                    { name: "Swarna", price: "₹2,420", unit: "per quintal" },
+                    { name: "IR 64", price: "₹2,220", unit: "per quintal" },
+                    { name: "MTU 1010", price: "₹2,520", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Regional Rice Hub",
+                contact: "📞 +91 92109 87654",
+                rating: "4.7 ⭐",
+                regions: ["Shantinagar", "Gauripur", "Regdi", "Kotmi"],
+                paddyTypes: [
+                    { name: "Swarna", price: "₹2,400", unit: "per quintal" },
+                    { name: "IR 64", price: "₹2,200", unit: "per quintal" },
+                    { name: "BPT 5204", price: "₹2,380", unit: "per quintal" },
+                    { name: "Samba Mahsuri", price: "₹2,480", unit: "per quintal" }
+                ]
+            },
+            {
+                name: "Premier Grain Solutions",
+                contact: "📞 +91 91098 76543",
+                rating: "4.9 ⭐",
+                regions: ["Ghot", "Shyamnagar", "Palaspur", "Regdi"],
+                paddyTypes: [
+                    { name: "Basmati 1509", price: "₹3,150", unit: "per quintal" },
+                    { name: "Basmati 1121", price: "₹3,280", unit: "per quintal" },
+                    { name: "PR 126", price: "₹2,900", unit: "per quintal" }
+                ]
+            }
+        ];
+
+        function showDealers() {
+            const areaSelect = document.getElementById('areaSelect');
+            const selectedArea = areaSelect.value;
+
+            if (!selectedArea) {
+                alert('Please select an area first!');
+                return;
+            }
+
+            document.getElementById('selectedArea').textContent = `Dealers in ${selectedArea}`;
+            document.getElementById('areaSelectionCard').style.display = 'none';
+            document.getElementById('dealersCard').classList.add('active');
+
+            // Filter dealers that serve the selected region
+            const dealers = dealersData.filter(dealer => 
+                dealer.regions.includes(selectedArea)
+            );
+
+            displayDealers(dealers, selectedArea);
+        }
+
+        function displayDealers(dealers, selectedArea) {
+            const dealersList = document.getElementById('dealersList');
+
+            if (dealers.length === 0) {
+                dealersList.innerHTML = '<div class="no-dealers">No dealers found in this area. Please check back later.</div>';
+                return;
+            }
+
+            dealersList.innerHTML = dealers.map(dealer => `
+                <div class="dealer-card">
+                    <div class="dealer-header">
+                        <div class="dealer-name">${dealer.name}</div>
+                        <div class="dealer-rating">${dealer.rating}</div>
+                    </div>
+                    <div class="dealer-info">
+                        <div class="dealer-contact">${dealer.contact}</div>
+                        <div class="info-text">Serving regions:</div>
+                        <div class="dealer-regions">
+                            ${dealer.regions.map(region => `
+                                <span class="region-badge ${region === selectedArea ? 'current' : ''}">${region}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="paddy-types">
+                        ${dealer.paddyTypes.map(paddy => `
+                            <div class="paddy-item">
+                                <div class="paddy-name">${paddy.name}</div>
+                                <div class="paddy-price">
+                                    ${paddy.price}
+                                    <span class="price-unit">${paddy.unit}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function goBack() {
+            document.getElementById('dealersCard').classList.remove('active');
+            document.getElementById('areaSelectionCard').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
