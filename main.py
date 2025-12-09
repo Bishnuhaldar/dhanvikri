@@ -6,7 +6,7 @@ from typing import List, Dict
 import base64
 
 # GitHub Configuration
-GITHUB_TOKEN = "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"
+GITHUB_TOKEN = "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"
 GITHUB_REPO = "Bishnuhaldar/dhanvikri"
 GITHUB_BRANCH = "main"
 GITHUB_FILEPATH = "index.html"
